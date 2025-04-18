@@ -1,0 +1,34 @@
+package TP2.EJ6;
+
+import TP2.EJ1.*;
+
+public class Transformacion {
+	private BinaryTree<Integer> ab;
+	
+	public BinaryTree<Integer> suma(){
+		if (!ab.isEmpty()) {
+			sumaPrivada (ab);
+			return ab;
+		}
+		return null;
+	}
+	
+	// no entiendo como devolver el valor de un nodo que no es hoja para agregarlo a la suma
+	private int sumaPrivada(BinaryTree<Integer> ab){
+		int suma = 0;
+		if (ab.isLeaf()) {
+			suma = ab.getData();
+			ab.setData(0);
+			return suma;
+		}
+		if (ab.hasLeftChild()) {
+			suma+= sumaPrivada(ab.getLeftChild());
+		}
+		if (ab.hasRightChild()) {
+			suma+= sumaPrivada(ab.getRightChild());
+		}
+		int actual = ab.getData();
+		ab.setData(suma + actual);
+		return suma + actual;
+	}
+}
